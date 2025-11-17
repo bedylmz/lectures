@@ -1,2 +1,0 @@
-# lectures
-HTMLs for lectures

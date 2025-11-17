@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1: Introduction - Exercises</title>
+    <!--
+      As per your instructions, I'm using Tailwind CSS for general styling
+      and a bit of custom CSS for the expand/collapse functionality.
+    -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Using Tailwind's 'Inter' font */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Custom styles for the accordion */
+        .question-btn {
+            background-color: #f1f5f9; /* gray-100 */
+            color: #1e293b; /* gray-800 */
+            cursor: pointer;
+            padding: 1.25rem;
+            width: 100%;
+            text-align: left;
+            border: none;
+            outline: none;
+            transition: background-color 0.3s ease;
+            font-weight: 600;
+            border-radius: 0.5rem; /* rounded-lg */
+            margin-top: 0.5rem;
+        }
+
+        .question-btn:hover, .question-btn.active {
+            background-color: #e2e8f0; /* gray-200 */
+        }
+
+        .question-btn::after {
+            content: '\2795'; /* Plus sign */
+            font-size: 0.8rem;
+            float: right;
+            margin-left: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .question-btn.active::after {
+            content: '\2796'; /* Minus sign */
+        }
+
+        .answer-panel {
+            padding: 1.25rem;
+            background-color: white;
+            display: none; /* Hidden by default */
+            overflow: hidden;
+            border: 1px solid #e2e8f0; /* gray-200 */
+            border-top: none;
+            border-radius: 0 0 0.5rem 0.5rem; /* rounded-b-lg */
+        }
+        
+        /* Style for the answer text itself */
+        .answer-panel p {
+            margin-bottom: 0.75rem;
+        }
+        .answer-panel ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .answer-panel li {
+            margin-bottom: 0.25rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+    <div class="container mx-auto max-w-4xl p-4 md:p-8">
+
+        <h1 class="text-3xl font-bold text-blue-700 mb-6">Chapter 1: Introduction</h1>
+
+        <!-- Practice Exercises -->
+        <h2 class="text-2xl font-semibold text-gray-800 border-b-2 border-blue-200 pb-2 mb-4">Practice Exercises</h2>
+
+        <!-- Question 1.1 -->
+        <button type="button" class="question-btn">1.1 What are the three main purposes of an operating system?</button>
+        <div class="answer-panel">
+            <p>As we discuss in Section 1.1, the operating system serves three main purposes:</p>
+            <ul>
+                <li><strong>To provide an environment</strong> for a user to execute programs on the computer hardware in a convenient and efficient manner.</li>
+                <li><strong>To allocate the resources</strong> of the computer (such as CPU time, memory, and I/O devices) as needed to solve problems. This allocation should be as fair and efficient as possible.</li>
+                <li><strong>To act as a control program.</strong> This involves supervising the execution of user programs to prevent errors and improper use, and managing the operation and control of I/O devices.</li>
+            </ul>
+        </div>
+
+        <!-- Question 1.2 -->
+        <button type="button" class="question-btn">1.2 We have stressed the need for an operating system to make efficient use of the computing hardware. When is it appropriate for the operating system to forsake this principle and to "waste" resources? Why is such a system not really wasteful?</button>
+        <div class="answer-panel">
+            <p>This is an excellent question that gets at the different goals of an OS. In a single-user system, such as a personal computer (PC), it is appropriate for the OS to "waste" resources.</p>
+            <p>As we state in Section 1.1.1, the goal of a PC operating system is to **maximize the work (or play) that the user is performing.** It is designed for ease of use and user performance, not for resource utilization.</p>
+            <p>For example, a PC's CPU may sit idle for long periods waiting for the user to type on the keyboard. From a mainframe's perspective, this is a terrible waste. But for a PC, this "waste" is necessary to provide a fast, responsive experience when the user *does* provide input.</p>
+            <p>It is not "really wasteful" because the system is successfully meeting its design goal, which in this case is user convenience, not resource maximization.</p>
+        </div>
+
+        <!-- Question 1.3 -->
+        <button type="button" class="question-btn">1.3 What is the main difficulty that a programmer must overcome in writing an operating system for a real-time environment?</button>
+        <div class="answer-panel">
+            <p>As we discuss in Section 1.11.8, the main difficulty is that a real-time system has **rigid, fixed time constraints.**</p>
+            <p>Unlike a general-purpose system, where it is *desirable* to be fast, a real-time system *must* complete a task within a defined deadline. If the system fails to meet this deadline—even if the computation is logically correct—the system has failed. Therefore, the programmer must write the OS to guarantee that scheduling and I/O operations are performed within those constraints.</p>
+        </div>
+
+        <!-- Question 1.4 -->
+        <button type="button" class="question-btn">1.4 Keeping in mind the various definitions of operating system, consider whether the operating system should include applications such as web browsers and mail programs. Argue both that it should and that it should not, and support your answers.</button>
+        <div class="answer-panel">
+            <p>This is a fascinating debate, as we allude to in Section 1.1.3 ("Defining Operating Systems"). There is no universally accepted definition.</p>
+            <ul>
+                <li><strong>Argument that it SHOULD:</strong> An operating system's goal is to provide a "usable computing system." For most users, a computer is *unusable* without a web browser or email client. These applications are fundamental to the user's experience. As we see in mobile operating systems, including middleware for common services (graphics, databases, multimedia) is standard. Including a browser is a logical extension of this "user view" of the OS.</li>
+                <li><strong>Argument that it SHOULD NOT:</strong> The "kernel" is the one program running at all times. Everything else is a system or application program. Including applications like browsers bloats the kernel, harms modularity, and makes the system less stable. It can also be anti-competitive, as the 1998 United States v. Microsoft case demonstrated. The OS should provide the *mechanisms* for applications to run, but not the applications themselves.</li>
+            </ul>
+        </div>
+
+        <!-- Question 1.5 -->
+        <button type="button" class="question-btn">1.5 How does the distinction between kernel mode and user mode function as a rudimentary form of protection (security) system?</button>
+        <div class="answer-panel">
+            <p>This is the most fundamental protection mechanism, which we cover in Section 1.5.1.</p>
+            <p>The hardware provides a **mode bit** to distinguish between user mode (1) and kernel mode (0). When a user application is running, the system is in user mode. When the OS gains control (via an interrupt or trap), it switches to kernel mode.</p>
+            <p>The hardware designates certain machine instructions as **privileged**. These are instructions that may cause harm, such as managing I/O, changing memory allocation, or modifying the timer. These privileged instructions can *only* be executed in kernel mode.</p>
+            <p>This provides protection by preventing a user program from, for example, directly accessing the disk or disabling the timer to hog the CPU. If a user program attempts to execute a privileged instruction, the hardware traps to the OS, which will terminate the errant program.</p>
+        </div>
+
+        <!-- Question 1.6 -->
+        <button type="button" class="question-btn">1.6 Which of the following instructions should be privileged?</button>
+        <div class="answer-panel">
+            <p>Based on the principle of protecting the OS and other processes (Section 1.5.1):</p>
+            <ul>
+                <li><strong>a. Set value of timer:</strong> <span class="font-semibold text-red-700">Privileged.</span> A user must not be able to change the timer, or they could prevent the OS from ever regaining control.</li>
+                <li><strong>b. Read the clock:</strong> <span class="font-semibold text-green-700">Not Privileged.</span> Reading the time is a harmless operation.</li>
+                <li><strong>c. Clear memory:</strong> <span class="font-semibold text-red-700">Privileged.</span> A user program must not be able to clear memory belonging to other processes or the kernel.</li>
+                <li><strong>d. Issue a trap instruction:</strong> <span class="font-semibold text-green-700">Not Privileged.</span> This is the mechanism for a system call. It is the *only* way for a user to request a service from the kernel.</li>
+                <li><strong>e. Turn off interrupts:</strong> <span class="font-semibold text-red-700">Privileged.</span> If a user program could turn off interrupts, it could prevent the OS from regaining control, effectively halting the system.</li>
+                <li><strong>f. Modify entries in device-status table:</strong> <span class="font-semibold text-red-700">Privileged.</span> This is part of I/O management and must be protected.</li>
+                <li><strong>g. Switch from user to kernel mode:</strong> <span class="font-semibold text-red-700">Privileged.</span> A user program cannot *arbitrarily* change the mode bit. It can only execute a trap, which *causes the hardware* to switch to kernel mode. An explicit "set mode bit" instruction is privileged.</li>
+                <li><strong>h. Access I/O device:</strong> <span class="font-semibold text-red-700">Privileged.</span> All I/O control must be managed by the kernel to ensure protection and prevent conflicts.</li>
+            </ul>
+        </div>
+
+        <!-- Question 1.7 -->
+        <button type="button" class="question-btn">1.7 Some early computers protected the operating system by placing it in a memory partition that could not be modified by either the user job or the operating system itself. Describe two difficulties that you think could arise with such a scheme.</button>
+        <div class="answer-panel">
+            <p>This is an interesting historical approach. Two major difficulties would be:</p>
+            <ol>
+                <li><strong>Updating and Patching:</strong> If the OS is in a read-only partition, it becomes impossible to apply security patches or bug fixes. The OS could never be updated without a hardware-level change, which is impractical.</li>
+                <li><strong>Dynamic Data:</strong> The OS is not static; it must maintain dynamic data, such as the list of current processes (the PCB list), I/O request queues, and interrupt vectors. If the OS partition is read-only, it cannot store this data internally. This data would have to be kept in a separate, modifiable RAM partition, which would then be vulnerable to errant user programs.</li>
+            </ol>
+        </div>
+
+        <!-- Question 1.8 -->
+        <button type="button" class="question-btn">1.8 Some CPUs provide for more than two modes of operation. What are two possible uses of these multiple modes?</button>
+        <div class="answer-panel">
+            <p>As we mention in Section 1.5.1, we can extend the mode concept. Two possible uses are:</p>
+            <ol>
+                <li><strong>Virtualization:</strong> A **Virtual Machine Manager (VMM)** needs more privileges than a user process (it needs to manage virtual machines), but fewer privileges than the kernel. CPUs that support virtualization often have a separate mode for the VMM.</li>
+                <li><strong>Layered Protection:</strong> CPU designers, like Intel, provide multiple "privilege levels" (e.g., four rings). This allows for a more granular separation, such as placing the core kernel in the most privileged ring, device drivers in a slightly less privileged ring, and user applications in the least privileged ring.</li>
+            </ol>
+        </div>
+
+        <!-- Question 1.9 -->
+        <button type="button" class="question-btn">1.9 Timers could be used to compute the current time. Provide a short description of how this could be accomplished.</button>
+        <div class="answer-panel">
+            <p>This is a direct application of the timer interrupt we discuss in Section 1.5.2.</p>
+            <p>The operating system could maintain a global counter variable that stores the number of timer interrupts that have occurred since the system booted.</p>
+            <ol>
+                <li>At boot time, the OS would record a "start time" (from a hardware clock) and initialize a counter to zero.</li>
+                <li>The hardware timer would be set to interrupt at a fixed, known rate (e.g., 1,000 times per second, or 1ms).</li>
+                <li>In the timer's interrupt service routine, the OS would increment this counter.</li>
+                <li>To compute the "current time," the OS would simply add the counter value (e.g., 55,000 ticks = 55 seconds) to the stored "start time."</li>
+            </ol>
+        </div>
+
+        <!-- Question 1.10 -->
+        <button type="button" class="question-btn">1.10 Give two reasons why caches are useful. What problems do they solve? What problems do they cause? If a cache can be made as large as the device for which it is caching (for instance, a cache as large as a disk), why not make it that large and eliminate the device?</button>
+        <div class="answer-panel">
+            <p>We discuss caching as a core principle in Section 1.8.3.</p>
+            <p><strong>Reasons Caches are Useful:</strong>
+                1. They bridge the speed gap between fast components (like the CPU) and slower components (like main memory), preventing the CPU from "stalling" while waiting for data.
+                2. They reduce the traffic on the main system bus, as the CPU can fetch data from its local cache instead of main memory.</p>
+            <p><strong>Problem Solved:</strong> They solve the performance bottleneck of waiting for slower-speed storage.</p>
+            <p><strong>Problem Caused:</strong> The primary problem is **cache coherency**, especially in multiprocessor systems (Section 1.8.3). If two CPUs have their own local caches, they can hold different (stale) copies of the same data, leading to inconsistency.</p>
+            <p><strong>Why not make it that large?</strong>
+                The simple answer is **cost**. The storage hierarchy (Section 1.2.2) is a trade-off between speed, cost, and size. Cache (e.g., SRAM) is significantly more expensive per bit than the device it caches (e.g., DRAM or disk). It would be prohibitively expensive to build a cache as large as a multi-terabyte disk.</p>
+        </div>
+
+        <!-- Question 1.11 -->
+        <button type="button" class="question-btn">1.11 Distinguish between the client-server and peer-to-peer models of distributed systems.</button>
+        <div class="answer-panel">
+            <p>We define these two models in our discussion of Computing Environments (Sections 1.11.4 and 1.11.5).</p>
+            <ul>
+                <li><strong>Client-Server Model:</strong> This is a centralized model. A central **server** process provides resources or services (e.g., a file server or web server). Multiple **client** processes request those services. The server is a bottleneck and a single point of failure.</li>
+                <li><strong>Peer-to-Peer (P2P) Model:</strong> This is a decentralized model. All nodes in the system are **peers** and can act as *both* a client and a server. It is more scalable (every new peer adds capacity) and reliable (no single point of failure).</li>
+            </ul>
+        </div>
+
+        <!-- Exercises -->
+        <h2 class="text-2xl font-semibold text-gray-800 border-b-2 border-blue-200 pb-2 mb-4 mt-8">Exercises</h2>
+
+        <!-- Question 1.12 -->
+        <button type="button" class="question-btn">1.12 In a multiprogramming and time-sharing environment, several users share the system simultaneously. This situation can result in various security problems.</button>
+        <div class="answer-panel">
+            <p>This is a fundamental issue we address with protection mechanisms.</p>
+            <p><strong>a. What are two such problems?</strong></p>
+            <ol>
+                <li><strong>Unauthorized Access (Confidentiality):</strong> One process reading the memory or files of another user or the operating system itself (e.g., reading a password file).</li>
+                <li><strong>Unauthorized Modification (Integrity):</strong> One process writing to and corrupting the data or code of another process, or even the kernel. This could crash the system or allow a malicious program to take control.</li>
+            </ol>
+            <p><strong>b. Can we ensure the same degree of security in a time-shared machine as in a dedicated machine? Explain your answer.</strong></p>
+            <p><strong>No.</strong> A dedicated machine (one user) is primarily secured by *physical* access. If you are the only one with a key to the room, your data is secure from other users.</p>
+            <p>A time-shared machine, however, relies on *software* (the OS) and *hardware* (the mode bit) to enforce logical separation. This logical protection is far more complex than physical protection. As we see in Section 1.5.1, any bug in the OS kernel could potentially lead to a protection failure. This complexity makes it inherently less secure than the simplicity of a dedicated machine.</p>
+        </div>
+
+        <!-- Question 1.13 -->
+        <button type="button" class="question-btn">1.13 The issue of resource utilization shows up in different forms in different types of operating systems. List what resources must be managed carefully in the following settings:</button>
+        <div class="answer-panel">
+            <p>As we discuss in Section 1.1, the goals of the OS change based on the environment.</p>
+            <ul>
+                <li><strong>a. Mainframe or minicomputer systems:</strong> The OS is designed to **maximize resource utilization.** All resources must be managed carefully: **CPU time, memory, file-storage space, and I/O devices.** The goal is to keep all users happy and the expensive hardware busy.</li>
+                <li><strong>b. Workstations connected to servers:</strong> The workstation itself prioritizes user responsiveness, so its local resources are less of a concern. The critical resources to manage are **network bandwidth** and access to the shared **server resources** (like file storage or print servers).</li>
+                <li><strong>c. Mobile computers:</strong> The primary constraints are **battery power** and **memory**. The OS must be aggressive in managing power to ensure usability, and it must manage the limited memory and smaller storage space efficiently.</li>
+            </ul>
+        </div>
+
+        <!-- Question 1.14 -->
+        <button type="button" class="question-btn">1.14 Under what circumstances would a user be better off using a time-sharing system than a PC or a single-user workstation?</button>
+        <div class="answer-panel">
+            <p>A user would be better off with a time-sharing system in several circumstances (Sections 1.1, 1.4):</p>
+            <ul>
+                <li>When the user needs to run a very large computation (a "big job") that requires more CPU power or memory than a standard PC provides.</li>
+                <li>When the user needs to access a massive, centralized dataset (like a large database) that cannot be stored on a single PC.</li>
+                <li>When cost is a primary factor and it is cheaper to provide one powerful time-shared system and many "dumb terminals" than to buy hundreds of full-featured PCs.</li>
+                <li>When active collaboration is required, such as in a transaction system where many users must access the same data concurrently.</li>
+            </ul>
+        </div>
+
+        <!-- Question 1.15 -->
+        <button type="button" class="question-btn">1.15 Describe the differences between symmetric and asymmetric multiprocessing. What are three advantages and one disadvantage of multiprocessor systems?</button>
+        <div class="answer-panel">
+            <p>We discuss this in Section 1.3.2, "Multiprocessor Systems."</p>
+            <p><strong>Differences:</strong>
+                In **asymmetric multiprocessing (AMP)**, there is a "boss-worker" (or master-slave) relationship. One processor (the boss) controls the system and schedules work for the other processors.
+                In **symmetric multiprocessing (SMP)**, all processors are peers. Each processor runs all tasks within the OS, including scheduling itself. This is the most common modern approach.</p>
+            <p><strong>Three Advantages:</strong></p>
+            <ol>
+                <li><strong>Increased Throughput:</strong> We get more work done in less time.</li>
+                <li><strong>Economy of Scale:</strong> It is cheaper to have one system with multiple processors than multiple separate computers, as they can share peripherals, storage, and power supplies.</li>
+                <li><strong>Increased Reliability:</strong> If one processor fails, the system does not halt; it just slows down. This is called **graceful degradation**.</li>
+            </ol>
+            <p><strong>One Disadvantage:</strong>
+                Increased complexity in both the hardware (e.g., ensuring cache coherency) and the software (e.g., writing an OS that can run on multiple processors at once without race conditions).</p>
+        </div>
+
+        <!-- Question 1.16 -->
+        <button type="button" class="question-btn">1.16 How do clustered systems differ from multiprocessor systems? What is required for two machines belonging to a cluster to cooperate to provide a highly available service?</button>
+        <div class="answer-panel">
+            <p>We make this distinction in Section 1.3.3.</p>
+            <p><strong>Difference:</strong> Multiprocessor systems are **tightly coupled**; they are a *single computer* sharing memory, a bus, and a clock. Clustered systems are **loosely coupled**; they are *multiple, independent computers* (or nodes) that are joined together by a network (like a LAN).</p>
+            <p><strong>Requirements for High Availability:</strong>
+                For two machines to cooperate in a high-availability cluster, they require:</p>
+            <ol>
+                <li><strong>Shared Storage:** A network (like a SAN) that allows both nodes to access the same data.</li>
+                <li><strong>Monitoring:** Cluster software that runs on each node to monitor the others (often a "heartbeat" over the network) so that a failure can be detected.</li>
+                <li><strong>Locking:** A **Distributed Lock Manager (DLM)** is required to ensure that the nodes do not access the shared storage at the same time and corrupt the data.</li>
+            </ol>
+        </div>
+
+        <!-- Question 1.17 -->
+        <button type="button" class="question-btn">1.17 Consider a computing cluster consisting of two nodes running a database. Describe two ways in which the cluster software can manage access to the data on the disk. Discuss the benefits and disadvantages of each.</button>
+        <div class="answer-panel">
+            <p>We discuss these two clustering models in Section 1.3.3.</p>
+            <p><strong>1. Asymmetric Clustering (Hot-Standby):</strong>
+                One machine is the active server, running the database and handling all requests. The other machine is in "hot-standby" mode, doing nothing but monitoring the active server. If the active server fails, the standby machine takes over.
+                <ul>
+                    <li><strong>Benefit:</strong> It is simple to implement, as there are no data-access conflicts to manage.</li>
+                    <li><strong>Disadvantage:</strong> It is inefficient. Half of the hardware resources (the standby node) are sitting idle and not being used.</li>
+                </ul>
+            </p>
+            <p><strong>2. Symmetric Clustering:</strong>
+                Both hosts are running the database application and monitoring each other. Both can handle requests concurrently.
+                <ul>
+                    <li><strong>Benefit:</strong> It is highly efficient and provides high performance, as all hardware is being used.</li>
+                    <li><strong>Disadvantage:</strong> It is very complex to implement. It requires a distributed lock manager (DLM) to ensure that the two nodes do not try to write to the same piece of data at the same time.</li>
+                </ul>
+            </p>
+        </div>
+
+        <!-- Question 1.18 -->
+        <button type="button" class="question-btn">1.18 How are network computers different from traditional personal computers? Describe some usage scenarios in which it is advantageous to use network computers.</button>
+        <div class="answer-panel">
+            <p>We discuss this in Section 1.11.1, "Traditional Computing."</p>
+            <p><strong>Difference:</strong> A traditional PC is a "fat client"—a complete system with its own OS, storage, and processing power. A **network computer** (or **thin client**) is a simple terminal that relies on a central server for all of its storage, processing, and applications. It is essentially just a screen and keyboard.</p>
+            <p><strong>Advantageous Scenarios:</strong></p>
+            <ul>
+                <li><strong>Centralized Administration:</strong> In a large company, it is easier to update an application *once* on the server than to update it on 1,000 separate PCs.</li>
+                <li><strong>High Security:</strong> Useful in banks or military settings. Since there is no local storage (no hard drive), users cannot install unauthorized software or steal sensitive data.</li>
+                <li><strong>Lower Cost:</strong> Thin clients are much cheaper to purchase than full-featured PCs.</li>
+            </ul>
+        </div>
+
+        <!-- Question 1.19 -->
+        <button type="button" class="question-btn">1.19 What is the purpose of interrupts? How does an interrupt differ from a trap? Can traps be generated intentionally by a user program? If so, for what purpose?</button>
+        <div class="answer-panel">
+            <p>We cover this in Sections 1.2.1 and 1.5.1.</p>
+            <p><strong>Purpose of Interrupts:</strong> The purpose of an interrupt is to signal the CPU that an event has occurred, which causes the CPU to stop its current task and transfer execution to the operating system (the interrupt service routine). This allows I/O devices to run concurrently with the CPU, interrupting only when they are finished.</p>
+            <p><strong>Interrupt vs. Trap:</strong>
+                An **interrupt** is *asynchronous*. It is generated by **hardware** (like a timer, a disk controller, or a keyboard) at any time, unrelated to the instruction the CPU is currently executing.
+                A **trap** (or exception) is *synchronous*. It is generated by **software** as a direct result of executing an instruction. This can be caused by an error (like division by zero) or, as we see next, it can be intentional.</p>
+            <p><strong>Can traps be generated intentionally?</strong>
+                **Yes.** This is the fundamental mechanism for a **system call**. A user program intentionally executes a trap instruction to request that the operating system perform a privileged task on its behalf, such as reading a file or accessing a device.</p>
+        </div>
+
+        <!-- Question 1.20 -->
+        <button type="button" class="question-btn">1.20 Direct memory access is used for high-speed I/O devices in order to avoid increasing the CPU’s execution load.</button>
+        <div class="answer-panel">
+            <p>We describe the DMA process in Section 1.2.3.</p>
+            <p><strong>a. How does the CPU interface with the device to coordinate the transfer?</strong>
+                The CPU "sets up" the transfer by writing several values into the registers of the **DMA controller**:
+                <ol>
+                    <li>The starting memory address for the data.</li>
+                    <li>The I/O device address.</li>
+                    <li>The number of bytes to transfer.</li>
+                    <li>The direction of the transfer (read from device or write to device).</li>
+                </ol>
+                Once set, the CPU is free to do other work.
+            </p>
+            <p><strong>b. How does the CPU know when the memory operations are complete?</strong>
+                The DMA controller sends a single **hardware interrupt** to the CPU when the *entire block* of data has been transferred. This is far more efficient than the alternative, which would be one interrupt *per byte*.</p>
+            <p><strong>c. The CPU is allowed to execute other programs while the DMA controller is transferring data. Does this process interfere with the execution of the user programs? If so, describe what forms of interference are caused.</strong>
+                **Yes, it does interfere**, though in a minor way. Both the CPU and the DMA controller need to access the memory bus to read or write data. Since only one can use the bus at a time, the DMA controller must "steal" memory cycles from the CPU. This forces the CPU to wait, which can slightly slow down the execution of the user program. This interference is known as **cycle stealing**.</p>
+        </div>
+
+        <!-- Question 1.21 -->
+        <button type="button" class="question-btn">1.21 Some computer systems do not provide a privileged mode of operation in hardware. Is it possible to construct a secure operating system for these computer systems? Give arguments both that it is and that it is not possible.</button>
+        <div class="answer-panel">
+            <p>This question challenges the core assumption of Section 1.5.1.</p>
+            <p><strong>Argument: YES, it is possible.</strong>
+                We could construct a secure OS if we do not run native code. If all programs are run through a software **interpreter** (like a JVM), the interpreter itself can check every instruction for safety before executing it, thus providing software-based protection. We could also use a **type-safe language** and a verifying compiler to achieve the same result.
+            </p>
+            <p><strong>Argument: NO, it is not possible.</strong>
+                For a *general-purpose* operating system that runs arbitrary user-compiled (native) programs, it is impossible. Without a privileged mode, a user program could simply:
+                <ul>
+                    <li>Write directly over the operating system's memory.</li>
+                    <li>Disable interrupts and never return control to the OS.</li>
+                    <li>Directly access any I/O device.</li>
+                </ul>
+                There would be no way for the hardware to enforce any protection, so the system would be completely insecure.
+            </p>
+        </div>
+
+        <!-- Question 1.22 -->
+        <button type="button" class="question-btn">1.22 Many SMP systems have different levels of caches; one level is local to each processing core, and another level is shared among all processing cores. Why are caching systems designed this way?</button>
+        <div class="answer-panel">
+            <p>This is a hardware design trade-off, as we discuss with SMP architectures in Section 1.3.2 and caching in Section 1.8.3.</p>
+            <ul>
+                <li><strong>Local Cache (L1/L2):</strong> This cache is private to the core and provides the *fastest* possible access to data. Its purpose is to keep that specific core full of instructions and data, minimizing latency and reducing traffic on the main system bus.</li>
+                <li><strong>Shared Cache (L3):</strong> This cache is shared by *all* cores. Its purpose is to provide a fast way for cores to **share data** with each other. It is much faster than communicating via main memory, and it helps mitigate the **cache coherency** problem, as all cores have a common view of this data.</li>
+            </ul>
+        </div>
+
+        <!-- Question 1.23 -->
+        <button type="button" class="question-btn">1.23 Consider an SMP system similar to the one shown in Figure 1.6. Illustrate with an example how data residing in memory could in fact have a different value in each of the local caches.</button>
+        <div class="answer-panel">
+            <p>This illustrates the **cache coherency** problem (Section 1.8.3):</p>
+            <ol>
+                <li>Assume a variable `X` in main memory has the value `5`.</li>
+                <li><strong>CPU 0</strong> reads `X`. A copy of `X` with value `5` is placed in CPU 0's local cache.</li>
+                <li><strong>CPU 1</strong> reads `X`. A copy of `X` with value `5` is placed in CPU 1's local cache.</li>
+                <li><strong>CPU 0</strong> writes `X = 10`. It updates *only its local cache* to `10`.</li>
+                <li><strong>Result:</strong> The system is now in an incoherent state. Main memory has `X=5`, CPU 1's cache has `X=5`, and CPU 0's cache has `X=10`. If CPU 1 accesses `X` again, it will read the stale value of `5`.</li>
+            </ol>
+        </div>
+
+        <!-- Question 1.24 -->
+        <button type="button" class="question-btn">1.24 Discuss, with examples, how the problem of maintaining coherence of cached data manifests itself in the following processing environments:</button>
+        <div class="answer-panel">
+            <p>We discuss this in Section 1.8.3. The problem is about ensuring all copies of data are up-to-date.</p>
+            <p><strong>a. Single-processor systems:</strong>
+                The problem is between the **CPU cache** and **I/O devices** using DMA.
+                * **Example:** The CPU updates a variable `A` in its cache. It then tells the DMA controller to write `A` to disk. The DMA controller reads from main memory, which still has the *old* value of `A`. The OS must explicitly **flush** the cache to memory before initiating a DMA write to ensure the I/O device gets the correct, new data.
+            </p>
+            <p><strong>b. Multiprocessor systems:</strong>
+                The problem is between the **local caches of different CPUs**.
+                * **Example:** As in 1.23, CPU 0 updates `A` in its cache, and CPU 1 has a stale copy of `A` in its cache. This is typically solved by hardware (e.g., bus snooping) where a write to one cache *invalidates* the copies in all other caches.
+            </p>
+            <p><strong>c. Distributed systems:</strong>
+                This is not a hardware cache problem, but a *software* caching problem.
+                * **Example:** A **distributed file system**. Node A in the cluster downloads (caches) a file from the server. Node B downloads the same file. Node A modifies the file and saves it back to the server. Node B's local copy is now stale, and it is unaware of the change. This must be solved by software, such as a distributed lock manager.
+            </p>
+        </div>
+
+        <!-- Question 1.25 -->
+        <button type="button" class="question-btn">1.25 Describe a mechanism for enforcing memory protection in order to prevent a program from modifying the memory associated with other programs.</button>
+        <div class="answer-panel">
+            <p>As we describe in Section 1.5.3, the most common hardware mechanism is the use of a **Base Register** and a **Limit Register**.</p>
+            <p>These two registers define the legal address space of a process:</p>
+            <ul>
+                <li>The **Base Register** holds the smallest legal *physical* memory address.</li>
+                <li>The **Limit Register** specifies the *size* of the legal range.</li>
+            </ul>
+            <p>For every memory access a user program makes, the CPU hardware automatically checks if the address is between `base` and `base + limit`. If the address is outside this range, the hardware generates a **trap** to the operating system, which will terminate the program for illegal memory access (a segmentation fault).</p>
+        </div>
+
+        <!-- Question 1.26 -->
+        <button type="button" class="question-btn">1.26 Which network configuration—LAN or WAN—would best suit the following environments?</button>
+        <div class="answer-panel">
+            <p>We define these network types in Section 1.11.3.</p>
+            <ul>
+                <li><strong>a. A campus student union:</strong> <span class="font-semibold">LAN (Local-Area Network)</span>. A LAN connects computers within a single building or campus.</li>
+                <li><strong>b. Several campus locations across a statewide university system:</strong> <span class="font-semibold">WAN (Wide-Area Network)</span>. A WAN links systems across geographically separate areas like cities or countries.</li>
+                <li><strong>c. A neighborhood:</strong> <span class="font-semibold">LAN</span>. While larger than a single building, it is still a small, contained geographic area. A very large metropolitan network might be a MAN, but LAN is the better fit of the two choices.</li>
+            </ul>
+        </div>
+
+        <!-- Question 1.27 -->
+        <button type="button" class="question-btn">1.27 Describe some of the challenges of designing operating systems for mobile devices compared with designing operating systems for traditional PCs.</button>
+        <div class="answer-panel">
+            <p>We discuss the mobile computing environment in Sections 1.1.1 and 1.11.2. The challenges are significant:</p>
+            <ol>
+                <li><strong>Power Management:</strong> This is the most critical challenge. The OS must be extremely aggressive in managing the CPU, screen, and radios to conserve battery life, which is a very limited resource.</li>
+                <li><strong>Resource Scarcity:</strong> Mobile devices have less memory and typically slower processors than PCs. The OS itself must have a small memory footprint and manage application memory tightly.</li>
+                <li><strong>User Interface:** The OS must be designed for a touchscreen (handling gestures) and a small screen, which is a completely different paradigm from the mouse and keyboard of a PC.</li>
+            </ol>
+        </div>
+
+        <!-- Question 1.28 -->
+        <button type="button" class="question-btn">1.28 What are some advantages of peer-to-peer systems over client-server systems?</button>
+        <div class="answer-panel">
+            <p>As we compare in Sections 1.11.4 and 1.11.5, the peer-to-peer (P2P) model has key advantages:</p>
+            <ul>
+                <li><strong>Increased Reliability:</strong> In a client-server system, if the server fails, the entire service stops (a single point of failure). In P2P, the failure of one peer does not stop the network.</li>
+                <li><strong>Increased Scalability:</strong> In a client-server system, the server is a bottleneck as more clients join. In a P2P system, every peer that joins *adds* new capacity (storage, bandwidth) to the network, allowing it to scale.</li>
+            </ul>
+        </div>
+
+        <!-- Question 1.29 -->
+        <button type="button" class="question-btn">1.29 Describe some distributed applications that would be appropriate for a peer-to-peer system.</button>
+        <div class="answer-panel">
+            <p>Based on the P2P model described in Section 1.11.5, appropriate applications are decentralized:</p>
+            <ul>
+                <li><strong>File-sharing networks</strong> like Gnutella or BitTorrent, where the data is distributed among all peers.</li>
+                <li><strong>Voice over IP (VoIP)</strong> services like the original Skype, where the call data is routed directly between user (peers) rather than through a central server.</li>
+                <li><strong>Distributed search and discovery</strong> systems where there is no central index, and peers must ask each other for information.</li>
+            </ul>
+        </div>
+
+        <!-- Question 1.30 -->
+        <button type="button" class="question-btn">1.30 Identify several advantages and several disadvantages of open-source operating systems. Include the types of people who would find each aspect to be an advantage or a disadvantage.</button>
+        <div class="answer-panel">
+            <p>We discuss this in Section 1.12, "Open-Source Operating Systems."</p>
+            <p><strong>Advantages:</strong></p>
+            <ul>
+                <li><strong>For Students/Learners:</strong> The ability to study the source code is an invaluable learning tool.</li>
+                <li><strong>For Everyone:</strong> A large community of programmers helps find and fix bugs, arguably making the code more secure and reliable ("many eyes").</li>
+                <li><strong>For Users/Companies:</strong> The software is typically free of cost.</li>
+            </ul>
+            <p><strong>Disadvantages:</strong></p>
+            <ul>
+                <li><strong>For Commercial Software Companies:</strong> They may not want to open-source their code and reveal their proprietary ideas to competitors.</li>
+                <li><strong>For Content Producers:</strong> The open-source model is incompatible with Digital Rights Management (DRM), as the source code for the copy protection would be visible.</li>
+                <li><strong>For some Corporate Users:</strong> May lack a single, guaranteed support channel, although companies like Red Hat have built a business model around providing this support.</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <script>
+        // JavaScript for the accordion functionality
+        var acc = document.getElementsByClassName("question-btn");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                // Toggle the 'active' class on the button
+                this.classList.toggle("active");
+
+                // Get the answer panel, which is the next element
+                var panel = this.nextElementSibling;
+
+                // Toggle the display
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
