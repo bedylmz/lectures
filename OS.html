@@ -973,8 +973,11 @@
         <button type="button" class="question-btn w-full p-5 mt-2 rounded-lg bg-gray-100 text-gray-800 font-semibold text-left hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">3.17 Using the program shown in Figure 3.35, explain what the output will be at lines X and Y.</button>
        <div class="answer-panel hidden p-5 bg-white dark:bg-gray-800 dark:bg-opacity-50 border border-gray-200 dark:border-gray-700 border-t-0 rounded-b-lg">
             <p>This is a trick question about process address spaces (Section 3.3.1).</p>
-            <p><strong>LINE Y (Parent):</strong> The parent's `nums` array is unchanged because the child operates on its own *copy* of the data. The parent waits for the child, then prints its original array. Output: `PARENT: 0 1 2 3 4 `</p>
-            <p><strong>LINE X (Child):</strong> The `printf` statement is *outside* the `for` loop. When the loop finishes, the variable `i` will have the value 5 (because the loop condition is `i < SIZE`). The statement `printf("CHILD: %d ", nums[i]);` will then try to access `nums[5]`, which is out of bounds for the array. This will result in undefined behavior. The program will likely print a garbage value or crash with a segmentation fault.</p>
+            <p>Based on the code provided, here is the output for Line X and Line Y.
+
+            Line X (Child Output): CHILD: 0 CHILD: -1 CHILD: -4 CHILD: -9 CHILD: -16
+
+            Line Y (Parent Output): PARENT: 0 PARENT: 1 PARENT: 2 PARENT: 3 PARENT: 4</p>
         </div>
 
         <!-- Question 3.18 -->
